@@ -36,7 +36,6 @@ const Home = () => {
 
     return (
         <Container className="my-4">
-            {/* Greeting Card */}
             <Card className="text-center mb-4">
                 <Card.Body>
                     <Card.Title className="display-4">Welcome to Country Explorer!</Card.Title>
@@ -46,7 +45,6 @@ const Home = () => {
                 </Card.Body>
             </Card>
 
-            {/* Search Input */}
             <Form className="mb-4">
                 <Form.Group controlId="search">
                     <Form.Control
@@ -58,13 +56,10 @@ const Home = () => {
                 </Form.Group>
             </Form>
 
-            {/* Loading Indicator */}
             {loading && <Spinner animation="border" variant="primary" className="d-block mx-auto" />}
 
-            {/* Error Message */}
             {error && <Alert variant="danger">{error}</Alert>}
 
-            {/* Country Cards */}
             <Row>
                 {filteredCountries.map((country) => (
                     <Col key={country.ccn3} md={4} xs={12} className="mb-4">
