@@ -43,7 +43,7 @@ const AsianCountries = () => {
                 placeholder='Search Asian Countries' 
                 onChange={handleChange} 
             />
-            <Row md={3} xs={1}>
+            <Row md={5} xs={1}>
                 {countryCards}
             </Row>
         </div>

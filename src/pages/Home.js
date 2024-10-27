@@ -35,7 +35,7 @@ const Home = () => {
     });
 
     return (
-        <Container className="my-4">
+        <Container className="my-4" >
             <Card className="text-center mb-4">
                 <Card.Body>
                     <Card.Title className="display-4">Welcome to Country Explorer!</Card.Title>
@@ -60,9 +60,9 @@ const Home = () => {
 
             {error && <Alert variant="danger">{error}</Alert>}
 
-            <Row>
+            <Row lg={10} md={5} xs={1}>
                 {filteredCountries.map((country) => (
-                    <Col key={country.ccn3} md={4} xs={12} className="mb-4">
+                    <Col key={country.ccn3}  className="mb-4">
                         <CountryCard
                             flag={country.flags.png}
                             name={country.name.common}
