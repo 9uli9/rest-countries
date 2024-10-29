@@ -1,0 +1,55 @@
+/* Navbar.css */
+
+@font-face {
+    font-family: 'Jersey 10'; 
+    src: url('../fonts/jersey10.ttf') format('truetype');
+    font-weight: 400; 
+    font-style: normal; 
+}
+
+
+.navbar-custom {
+    background-color: #007bff; 
+}
+
+/* Button styles */
+.navbar-custom .nav-button {
+    font-family: 'Jersey 10' !important; 
+    font-weight: 400 !important; 
+    margin: 0 0.5rem;               
+    border-radius: 10px;          
+    transition: all 0.3s;    
+    padding: 0.5rem 1.5rem;        
+    font-size: 22px;   
+    color: #fff;
+    text-shadow: 
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;         
+}
+
+/* On hover effect */
+.navbar-custom .nav-button:hover {
+    background-color: #0056b3; 
+    color: #fff; 
+    transform: scale(1.05);         
+}
+
+
+.nav-link.active .nav-button {
+    background-color: #0056b3;        
+    color: #fff;                      
+}
+
+
+.nav-link {
+    text-decoration: none; 
+}
+
+
+.navbar-custom .navbar-brand img {
+    height: 50px; 
+    width: auto;
+    padding-right: 4rem;
+}

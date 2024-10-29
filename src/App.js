@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
 
+
 // Import pages
 import Home from './pages/Home';
 import SingleCountry from './pages/SingleCountry';
@@ -15,13 +16,16 @@ import EuropeanCountries from './pages/EuropeanCountries';
 import OceanicCountries from './pages/OceanicCountries'; 
 
 
+
+
 import { Container } from 'react-bootstrap';
 
 const App = () => {
     return (
-        <Container>
+        <Container fluid>
             <Router>
                 <Navbar />
+               
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/country/:name' element={<SingleCountry />} />
@@ -30,6 +34,7 @@ const App = () => {
                     <Route path="/asia" element={<AsianCountries />} />
                     <Route path="/europe" element={<EuropeanCountries />} />
                     <Route path="/oceania" element={<OceanicCountries />} />
+                   
       
                   
                 </Routes>

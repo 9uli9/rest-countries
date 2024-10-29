@@ -1,26 +1,31 @@
-// RecipeCard.js
 import React from 'react';
-import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; 
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
+import { Card, Row, Col } from 'react-bootstrap';
 
-const RecipeCard = ({ title, image, id }) => {
+const RecipeCard = ({ title, image, area }) => {
     return (
-        <Card className="recipe-card m-2" style={{ width: '150px', height: '200px' }}>
-            <Link to={`/recipe/${id}`}>
-                <Card.Img 
-                    variant="top" 
-                    src={image} 
-                    alt={title} 
-                    className="img-fluid" // Make the image responsive
-                    style={{ height: '100px', objectFit: 'cover' }} // Maintain aspect ratio
-                />
-                <Card.Body className="d-flex flex-column justify-content-between">
-                    <Card.Title className="recipe-title text-center" style={{ fontSize: '0.9rem' }}>
-                        {title}
-                    </Card.Title>
-                </Card.Body>
-            </Link>
+        <Card className="mb-4 shadow-sm" style={{ maxWidth: '300px', margin: 'auto', border: 'none' }}> 
+            <Row className="g-0">
+                <Col xs={4} className="d-flex justify-content-center align-items-center">
+                    <Card.Img 
+                        variant="top" 
+                        src={image} 
+                        alt={title} 
+                        style={{ 
+                            width: '80px', 
+                            height: '80px', 
+                            borderRadius: '8px', 
+                            objectFit: 'cover' 
+                        }} 
+                    />
+                </Col>
+                <Col xs={8}>
+                    <Card.Body className="d-flex flex-column justify-content-between">
+                        <Card.Title style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '4px' }}>
+                            {title}
+                        </Card.Title>
+                    </Card.Body>
+                </Col>
+            </Row>
         </Card>
     );
 };

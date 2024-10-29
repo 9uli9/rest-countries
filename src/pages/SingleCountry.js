@@ -1,56 +1,89 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from 'axios'
-import { Row, Col, Image } from 'react-bootstrap'
+import axios from 'axios';
+import { Row, Col, Image, Card, Container, Spinner, Alert } from 'react-bootstrap';
 
 const SingleCountry = () => {
     const { name } = useParams();
-
-    const [country, setCountry] = useState(null)
+    const [country, setCountry] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get(`https://restcountries.com/v3.1/name/${name}?fullText=true`)
-            .then((res) => {
-                console.log('Response:', res.data[0]);
-                setCountry(res.data[0])
-            })
-            .catch((e) => {
-                console.error(e)
-            })
-    }, [])
+        const fetchCountry = async () => {
+            try {
+                const response = await axios.get(`https://restcountries.com/v3.1/name/${name}?fullText=true`);
+                setCountry(response.data[0]);
+            } catch (e) {
+                setError("Could not fetch country details. Please try again later.");
+                console.error(e);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCountry();
+    }, [name]);
+
+    if (loading) {
+        return (
+            <Container className="text-center my-5">
+                <Spinner animation="border" variant="primary" />
+                <p>Loading country details...</p>
+            </Container>
+        );
+    }
+
+    if (error) {
+        return (
+            <Container className="text-center my-5">
+                <Alert variant="danger">{error}</Alert>
+            </Container>
+        );
+    }
 
     if (!country) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
     }
 
     return (
-        <Row>
-            <Col>
-                <Image src={country.flags.png} alt={`${country.name.common}'s flag`} />
-            </Col>
-
-            <Col>
-
-                <h1>{country.name.common}</h1>
-                <h2>Official name: {country.name.official}</h2>
-                <p>Region: {country.region}</p>
-                {
-                    country.subregion && <p>Sub-Region: {country.subregion}</p>
-                }
-
-                <p>Languages:</p>
-                <ul>
-                    {
-                        Object.values(country.languages).map((language) => {
-                            return <li>{language}</li>
-                        })
-                    }
-                </ul>
-
-                <p>Currency: {Object.values(country.currencies)[0].name} ({Object.values(country.currencies)[0].symbol})</p>
-            </Col>
-        </Row>
+        <Container className="my-5" style={{ backgroundColor: "#007bff", color: "white", padding: "20px", borderRadius: "8px" }}>
+            <Card className="shadow-lg">
+                <Row className="g-0">
+                    <Col md={6} className="d-flex justify-content-center align-items-center">
+                        <Image
+                            src={country.flags.png}
+                            alt={`${country.name.common}'s flag`}
+                            style={{ borderRadius: "5px", maxHeight: "300px", objectFit: "cover", border: "3px solid black" }}
+                        />
+                    </Col>
+                    <Col md={6} className="p-4">
+                        <h1>{country.name.common}</h1>
+                        <h2 className="text-secondary">Official Name: {country.name.official}</h2>
+                        <p><strong>Region:</strong> {country.region}</p>
+                        {country.subregion && <p><strong>Sub-Region:</strong> {country.subregion}</p>}
+                        <p><strong>Capital:</strong> {country.capital ? country.capital.join(', ') : "N/A"}</p>
+                        <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
+                        <p><strong>Area:</strong> {country.area.toLocaleString()} km²</p>
+                        <p><strong>Time Zones:</strong> {country.timezones.join(', ')}</p>
+                        {country.borders && <p><strong>Borders:</strong> {country.borders.join(', ')}</p>}
+                        <p><strong>Languages:</strong></p>
+                        <ul>
+                            {Object.values(country.languages).map((language, index) => (
+                                <li key={index}>{language}</li>
+                            ))}
+                        </ul>
+                        <p>
+                            <strong>Currency:</strong> {Object.values(country.currencies)[0].name} 
+                            ({Object.values(country.currencies)[0].symbol})
+                        </p>
+                        <p><strong>Driving Side:</strong> {country.car.side}</p>
+                        <p><strong>Independent:</strong> {country.independent ? "Yes" : "No"}</p>
+                    </Col>
+                </Row>
+            </Card>
+        </Container>
     );
 }
 
-export default SingleCountry
+export default SingleCountry;

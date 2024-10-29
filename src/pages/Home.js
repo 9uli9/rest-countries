@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import CountryCard from '../components/CountryCard';
+import WelcomeCard from '../components/WelcomeCard';
 import { Row, Col, Form, Spinner, Alert, Container, Card } from 'react-bootstrap';
 
 const Home = () => {
@@ -35,15 +36,9 @@ const Home = () => {
     });
 
     return (
-        <Container className="my-4" >
-            <Card className="text-center mb-4">
-                <Card.Body>
-                    <Card.Title className="display-4">Welcome to Country Explorer!</Card.Title>
-                    <Card.Text>
-                        Discover countries around the world, their flags, and regions.
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+        <Container  className="p-0">
+
+                 <WelcomeCard region="default" /> 
 
             <Form className="mb-4">
                 <Form.Group controlId="search">

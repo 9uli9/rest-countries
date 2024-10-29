@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container, Card, Form, Spinner, Alert, Row, Col } from 'react-bootstrap';
 import CountryCard from '../components/CountryCard';
+import WelcomeCard from '../components/WelcomeCard';
 
 const AfricanCountries = () => {
     const [africanCountries, setAfricanCountries] = useState([]);
@@ -32,7 +33,10 @@ const AfricanCountries = () => {
 
     return (
         <Container className="my-4">
-           
+                   <Container className="my-4">
+            <WelcomeCard region="africa" />
+            {/* adding more content later */}
+        </Container>
 
             <Form className="mb-4">
                 <Form.Group controlId="search">
