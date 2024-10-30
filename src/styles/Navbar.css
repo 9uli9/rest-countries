@@ -1,55 +1,85 @@
-/* Navbar.css */
-
 @font-face {
-    font-family: 'Jersey 10'; 
-    src: url('../fonts/jersey10.ttf') format('truetype');
-    font-weight: 400; 
-    font-style: normal; 
+    font-family: 'LobsterTwo-Regular';
+    src: url('../fonts/lobsterregular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
 }
 
 
-.navbar-custom {
-    background-color: #007bff; 
-}
-
-/* Button styles */
-.navbar-custom .nav-button {
-    font-family: 'Jersey 10' !important; 
-    font-weight: 400 !important; 
-    margin: 0 0.5rem;               
-    border-radius: 10px;          
-    transition: all 0.3s;    
-    padding: 0.5rem 1.5rem;        
-    font-size: 22px;   
+.navbar-custom h1 {
+    font-family: 'LobsterTwo-Regular' !important;
     color: #fff;
-    text-shadow: 
-        -1px -1px 0 #000,  
+    text-shadow:
+        -1px -1px 0 #000,
         1px -1px 0 #000,
         -1px 1px 0 #000,
-        1px 1px 0 #000;         
+        1px 1px 0 #000;
+    font-size: 2.5rem;
+
+    font-weight: bold;
+    font-style: italic;
+
+    margin: 0;
+
+    text-align: center;
+
+    padding: 10px 20px;
+
+    letter-spacing: 2px;
+
+
 }
 
-/* On hover effect */
+
+.navbar-custom h1:hover {
+    color: #ffcc00;
+
+}
+
+.navbar-custom {
+    background-color: #996632;
+}
+
+
+.navbar-custom .nav-button {
+    font-family: 'LobsterTwo-Regular' !important;
+    font-weight: 400 !important;
+    margin: 0 0.5rem;
+    border-radius: 5px;
+    border-color: #302011;
+    transition: all 0.3s;
+    padding: 0.5rem 1.5rem;
+    font-size: 22px;
+    color: #fff;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+
 .navbar-custom .nav-button:hover {
-    background-color: #0056b3; 
-    color: #fff; 
-    transform: scale(1.05);         
+    background-color: #754e27;
+    color: #ffcc00;
+    transform: scale(1.05);
 }
 
 
 .nav-link.active .nav-button {
-    background-color: #0056b3;        
-    color: #fff;                      
+    background-color: #54381d;
+    color: #ffcc00;
 }
 
 
-.nav-link {
-    text-decoration: none; 
+.nav-link :hover {
+    text-decoration: none;
+
 }
 
 
 .navbar-custom .navbar-brand img {
-    height: 50px; 
+    height: 50px;
     width: auto;
     padding-right: 4rem;
 }

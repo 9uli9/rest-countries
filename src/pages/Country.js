@@ -4,7 +4,6 @@ import axios from "axios";
 import { Image, Row, Col } from "react-bootstrap";
 
 const Country = () => {
-
   const { name } = useParams();
 
   const [country, setCountry] = useState({});
