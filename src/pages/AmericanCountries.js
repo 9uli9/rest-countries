@@ -46,20 +46,8 @@ const AmericanCountries = () => {
 
       <Container fluid style={{ backgroundColor: "white" }}>
         <Row>
-          <Col className="flex-grow-1" style={{ marginRight: "20px" }}>
-            <Form className="mt-4" style={{ width: "400px" }}>
-              <Form.Group controlId="search">
-                <Form.Control
-                  type="text"
-                  placeholder="Search for an American country"
-                  value={searchTerm}
-                  onChange={handleChange}
-                  size="sm"
-                  style={{ height: "35px" }}
-                />
-              </Form.Group>
-            </Form>
-
+          {/* Countries Column */}
+          <Col xs={6} sm={6} md={8} className="mb-4">
             {loading && (
               <Spinner
                 animation="border"
@@ -74,7 +62,20 @@ const AmericanCountries = () => {
               </Alert>
             )}
 
-            <Row md={5} xs={1}>
+            <Form className="mt-4" style={{ width: "400px" }}>
+              <Form.Group controlId="search">
+                <Form.Control
+                  type="text"
+                  placeholder="Search for an American country"
+                  value={searchTerm}
+                  onChange={handleChange}
+                  size="sm"
+                  style={{ height: "35px" }}
+                />
+              </Form.Group>
+            </Form>
+
+            <Row xl={5} lg={3} md={2} sm={1} xs={1} className="g-4">
               {filteredCountries.map((country) => (
                 <Col key={country.ccn3} className="mb-4">
                   <CountryCard
@@ -87,27 +88,29 @@ const AmericanCountries = () => {
             </Row>
           </Col>
 
-          <Col xs={12} md={4} style={{ paddingLeft: "20px" }}>
+          {/* DishRow Column */}
+          <Col xs={6} sm={6} md={4}>
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
+                gap: "1rem",
                 marginTop: "1.5rem",
               }}
             >
               <Row>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Mexican" />
                 </Col>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="American" />
                 </Col>
               </Row>
               <Row>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Canadian" />
                 </Col>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Jamaican" />
                 </Col>
               </Row>

@@ -24,7 +24,7 @@
     font-family: 'LobsterTwo-Regular', sans-serif;
     color: #fff;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* Default font size */
     font-weight: bold;
     margin: 0;
 }
@@ -32,8 +32,29 @@
 .info-banner p {
     font-family: 'Arial', sans-serif;
     font-style: italic;
-    font-size: 1.25rem;
+    font-size: 1.25rem; /* Default font size */
     color: #302011;
     letter-spacing: 0.5px;
     margin: 5px 0;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+    .info-banner h3 {
+        font-size: 1.8rem; /* Smaller heading size for mobile */
+    }
+
+    .info-banner p {
+        font-size: 1rem; /* Smaller paragraph size for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .info-banner h3 {
+        font-size: 1.5rem; /* Further reduce heading size for very small screens */
+    }
+
+    .info-banner p {
+        font-size: 0.9rem; /* Further reduce paragraph size for very small screens */
+    }
 }

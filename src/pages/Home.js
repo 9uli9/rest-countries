@@ -45,7 +45,8 @@ const Home = () => {
 
       <Container fluid style={{ backgroundColor: "white" }}>
         <Row>
-          <Col className="flex-grow-1" style={{ marginRight: "20px" }}>
+          {/* Countries Column */}
+          <Col xs={5} sm={5} md={8} className="mb-4">
             {loading && (
               <Spinner
                 animation="border"
@@ -69,9 +70,9 @@ const Home = () => {
               </Form.Group>
             </Form>
 
-            <Row lg={10} md={5} xs={1}>
+            <Row xl={5} lg={3} md={2} sm={1} xs={1} className="g-4">
               {filteredCountries.map((country) => (
-                <Col key={country.ccn3} className="mb-4">
+                <Col key={country.ccn3}>
                   <CountryCard
                     flag={country.flags.png}
                     name={country.name.common}
@@ -82,7 +83,8 @@ const Home = () => {
             </Row>
           </Col>
 
-          <Col xs={12} md={4} style={{ paddingLeft: "20px" }}>
+          {/* MultiCulturalRow Column */}
+          <Col xs={7} sm={6} md={4}>
             <MultiCulturalRow />
           </Col>
         </Row>

@@ -44,14 +44,10 @@ const EuropeanCountries = () => {
       <WelcomeCard region="europe" />
       <InfoBanner region="European" />
 
-      <Container
-        fluid
-        style={{
-          backgroundColor: "white",
-        }}
-      >
+      <Container fluid style={{ backgroundColor: "white" }}>
         <Row>
-          <Col className="flex-grow-1" style={{ marginRight: "20px" }}>
+          {/* Main content column */}
+          <Col xs={6} sm={6} md={8} className="mb-4">
             {loading && (
               <Spinner
                 animation="border"
@@ -79,9 +75,9 @@ const EuropeanCountries = () => {
               </Form.Group>
             </Form>
 
-            <Row md={5} xs={1}>
+            <Row xl={5} lg={3} md={2} sm={1} xs={1} className="g-4">
               {filteredCountries.map((country) => (
-                <Col key={country.ccn3} className="mb-4">
+                <Col key={country.ccn3}>
                   <CountryCard
                     flag={country.flags.png}
                     name={country.name.common}
@@ -92,56 +88,58 @@ const EuropeanCountries = () => {
             </Row>
           </Col>
 
-          <Col xs={12} md={4} style={{ paddingLeft: "20px" }}>
+          {/* Dishes column */}
+          <Col xs={6} sm={6} md={4}>
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
+                gap: "1rem",
                 marginTop: "1.5rem",
               }}
             >
               <Row>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="French" />
                 </Col>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Polish" />
                 </Col>
               </Row>
               <Row>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Irish" />
                 </Col>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Croatian" />
                 </Col>
               </Row>
               <Row>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Spanish" />
                 </Col>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="British" />
                 </Col>
               </Row>
               <Row>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Dutch" />
                 </Col>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Portuguese" />
                 </Col>
               </Row>
               <Row>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Greek" />
                 </Col>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Italian" />
                 </Col>
               </Row>
               <Row>
-                <Col xs={6}>
+                <Col xs={12} md={6}>
                   <DishRow cuisine="Ukrainian" />
                 </Col>
               </Row>
