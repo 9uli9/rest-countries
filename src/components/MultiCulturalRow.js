@@ -8,35 +8,61 @@ const MultiCulturalRow = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [cuisines, setCuisines] = useState([]); // To hold the available cuisines
 
+  // Fetch available cuisines
   useEffect(() => {
-    const fetchAllDishes = async () => {
+    const fetchCuisines = async () => {
+      try {
+        const response = await axios.get(
+          "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
+        );
+        setCuisines(response.data.meals); // Store available cuisines in state
+      } catch (err) {
+        console.error("Error fetching cuisines:", err);
+        setError("Error fetching cuisines.");
+      }
+    };
+
+    fetchCuisines();
+  }, []);
+
+  // Fetch dishes based on selected cuisine (area)
+  useEffect(() => {
+    const fetchDishesByCuisines = async () => {
       setLoading(true);
       try {
-        const categoriesResponse = await axios.get(
-          "https://www.themealdb.com/api/json/v1/1/categories.php"
-        );
-
         const allDishes = [];
 
-        for (const category of categoriesResponse.data.categories) {
-          const dishesResponse = await axios.get(
-            `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category.strCategory}`
+        // Loop through each cuisine and fetch dishes
+        for (const cuisine of cuisines) {
+          const response = await axios.get(
+            `https://www.themealdb.com/api/json/v1/1/filter.php?a=${cuisine.strArea}`
           );
-          allDishes.push(...dishesResponse.data.meals);
+          // If meals are found, add them to allDishes
+          if (response.data.meals) {
+            allDishes.push(
+              ...response.data.meals.map((dish) => ({
+                ...dish,
+                area: cuisine.strArea, // Add area to each dish
+              }))
+            );
+          }
         }
 
         setDishes(allDishes);
       } catch (error) {
-        setError("Error fetching dishes.");
         console.error("Error fetching dishes:", error);
+        setError("Error fetching dishes.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAllDishes();
-  }, []);
+    if (cuisines.length > 0) {
+      fetchDishesByCuisines();
+    }
+  }, [cuisines]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -75,11 +101,11 @@ const MultiCulturalRow = () => {
         <Row className="d-flex justify-content-center">
           {filteredDishes.length > 0 ? (
             filteredDishes.map((dish) => (
-              <Col key={dish.idMeal} xs={12} className="mb-4">
+              <Col key={dish.idMeal} xs={12} md={6} className="mb-4">
                 <DishCard
                   title={dish.strMeal}
                   image={dish.strMealThumb}
-                  area={dish.strArea}
+                  area={dish.area}
                 />
               </Col>
             ))

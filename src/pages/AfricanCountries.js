@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Form, Spinner, Alert, Row, Col } from "react-bootstrap";
+import InfoBanner from "../components/InfoBanner";
 import CountryCard from "../components/CountryCard";
 import WelcomeCard from "../components/WelcomeCard";
 import DishRow from "../components/DishRow";
@@ -42,97 +43,84 @@ const AfricanCountries = () => {
     <>
       <WelcomeCard region="africa" />
 
-      <div
-        style={{
-          backgroundColor: "#ffcc00",
-          padding: "10px 0",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <div style={{ textAlign: "start" }}>
-          <h3>Country Index</h3>
-          <p>Explore African countries!</p>
-        </div>
+      <InfoBanner region="African" />
 
-        <div style={{ textAlign: "end" }}>
-          <h3>Popular Dishes!</h3>
-          <p>Why not give them a try?</p>
-        </div>
-      </div>
-
-      <Container
-        fluid
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          backgroundColor: "white",
-        }}
-      >
-        <Container className="flex-grow-1" style={{ marginRight: "20px" }}>
-          <Form className="mb-4">
-            <Form.Group controlId="search">
-              <Form.Control
-                type="text"
-                placeholder="Search for an African country"
-                value={searchTerm}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Form>
-
-          {loading && (
-            <Spinner
-              animation="border"
-              variant="primary"
-              className="d-block mx-auto"
-            />
-          )}
-
-          {error && (
-            <Alert variant="danger" className="text-center">
-              {error}
-            </Alert>
-          )}
-
-          <Row md={5} xs={1}>
-            {filteredCountries.map((country) => (
-              <Col key={country.ccn3} className="mb-4">
-                <CountryCard
-                  flag={country.flags.png}
-                  name={country.name.common}
-                  region={country.region}
+      <Container fluid style={{ backgroundColor: "white" }}>
+        <Row>
+          <Col className="flex-grow-1" style={{ marginRight: "20px" }}>
+            <Form className="mt-4" style={{ width: "400px" }}>
+              <Form.Group controlId="search">
+                <Form.Control
+                  type="text"
+                  placeholder="Search for an African country"
+                  value={searchTerm}
+                  onChange={handleChange}
+                  size="sm"
+                  style={{ height: "35px" }}
                 />
-              </Col>
-            ))}
-          </Row>
-        </Container>
+              </Form.Group>
+            </Form>
 
-        <Container style={{ width: "500px" }}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Row>
-              <Col xs={6}>
-                <DishRow cuisine="Egyptian" />
-              </Col>
-              <Col xs={6}>
-                <DishRow cuisine="Kenyan" />
-              </Col>
+            {loading && (
+              <Spinner
+                animation="border"
+                variant="primary"
+                className="d-block mx-auto"
+              />
+            )}
+
+            {error && (
+              <Alert variant="danger" className="text-center">
+                {error}
+              </Alert>
+            )}
+
+            <Row md={5} xs={1}>
+              {filteredCountries.map((country) => (
+                <Col key={country.ccn3} className="mb-4">
+                  <CountryCard
+                    flag={country.flags.png}
+                    name={country.name.common}
+                    region={country.region}
+                  />
+                </Col>
+              ))}
             </Row>
-            <Row>
-              <Col xs={6}>
-                <DishRow cuisine="Moroccan" />
-              </Col>
-              <Col xs={6}>
-                <DishRow cuisine="Tunisian" />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={6}>
-                <DishRow cuisine="Jamaican" />
-              </Col>
-            </Row>
-          </div>
-        </Container>
+          </Col>
+
+          <Col xs={12} md={4} style={{ paddingLeft: "20px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "1.5rem",
+              }}
+            >
+              <Row>
+                <Col xs={6}>
+                  <DishRow cuisine="Egyptian" />
+                </Col>
+                <Col xs={6}>
+                  <DishRow cuisine="Tunisian" />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6}>
+                  <DishRow cuisine="Moroccan" />
+                </Col>
+                <Col xs={6}>
+                  <DishRow cuisine="Jamaican" />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6}>
+                  <DishRow cuisine="Kenyan" />
+                </Col>
+                <Col xs={6}></Col>
+              </Row>
+            </div>
+          </Col>
+        </Row>
       </Container>
     </>
   );
