@@ -1,7 +1,13 @@
+// First im importing react so i can create and use this countrycard component
+// Then im importing the card component from bootstrap for styling and the link component from react router for navigation links.
+// I also mad a custom ccs file for this component for more percise styling.
+
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../styles/CountryCard.css";
+
+// Basically this component creates a card for each country with its name, flag image, and region, it has a link to the singlecountry page.
 
 const CountryCard = ({ name, flag, region }) => {
   return (
@@ -29,4 +35,5 @@ const CountryCard = ({ name, flag, region }) => {
   );
 };
 
+// I also exported the component so it can be used in other parts of the app.
 export default CountryCard;

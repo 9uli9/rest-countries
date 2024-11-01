@@ -4,26 +4,28 @@ import axios from "axios";
 import { Image, Row, Col } from "react-bootstrap";
 
 const Country = () => {
+  // setting the parameter to name and setting country state
   const { name } = useParams();
-
   const [country, setCountry] = useState({});
 
-  // We could make a second API request here to get more details about the country
+  // This is calling axios to send a GET request to the rest countries api to get all countries by name
   useEffect(() => {
     axios
       .get(`https://restcountries.com/v3.1/name/${name}?fullText=true`)
       .then((response) => {
-        setCountry(response.data[0]);
+        setCountry(response.data[0]); // when it gets that data it updates the state
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error); // if it doesnt get the data it shows an error message and update the state
       });
   }, []);
 
   if (!country.name || !country.flags) {
+    // if it cant get country name of flags it returns loading
     return <p>Loading...</p>;
   }
 
+  // when it does get the data it shows a country with i row and columns with props like image,common name, official name, region, subregion and currency.
   return (
     <div>
       <Row>

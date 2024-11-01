@@ -11,6 +11,8 @@ import OceanicCountries from "./pages/OceanicCountries";
 import { Container } from "react-bootstrap";
 import "./styles/App.css";
 
+//defining routes and components
+
 const App = () => {
   return (
     <Container

@@ -11,11 +11,20 @@ import {
   Alert,
 } from "react-bootstrap";
 
+// importing map component
+
+import CountryMap from "../components/CountryMap";
+
+// setting the name parameter
+// setting a states like; setting country state, search term status, loading status as true, and error status.
+
 const SingleCountry = () => {
   const { name } = useParams();
   const [country, setCountry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // usign useEffect to call a function that gets the axios to request a GET request to the rest countries api and get countries by the name param.
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -23,19 +32,20 @@ const SingleCountry = () => {
         const response = await axios.get(
           `https://restcountries.com/v3.1/name/${name}?fullText=true`
         );
-        setCountry(response.data[0]);
+        setCountry(response.data[0]); // when it gets a country it updates the state of this
       } catch (e) {
         setError("Could not fetch country details. Please try again later.");
-        console.error(e);
+        console.error(e); // set error state if it cant get the country data
       } finally {
-        setLoading(false);
+        setLoading(false); // stop loading because the request is over
       }
     };
 
-    fetchCountry();
-  }, [name]);
+    fetchCountry(); // runs only once when the component is first rendered
+  }, [name]); // run this if the name changes
 
   if (loading) {
+    // if its loading show spinner
     return (
       <Container className="text-center my-5">
         <Spinner animation="border" variant="primary" />
@@ -45,6 +55,7 @@ const SingleCountry = () => {
   }
 
   if (error) {
+    // if it couldnt get the data show an alert
     return (
       <Container className="text-center my-5">
         <Alert variant="danger">{error}</Alert>
@@ -53,8 +64,12 @@ const SingleCountry = () => {
   }
 
   if (!country) {
+    //if theres no country show loading
     return <div>Loading...</div>;
   }
+
+  // then display the country details with a flag, common name,capital subregion etc
+  // this is displayed in columns and rows and styling with bootstrap
 
   return (
     <Container
@@ -119,7 +134,7 @@ const SingleCountry = () => {
             </ul>
             <p>
               <strong>Currency:</strong>{" "}
-              {Object.values(country.currencies)[0].name}(
+              {Object.values(country.currencies)[0].name} (
               {Object.values(country.currencies)[0].symbol})
             </p>
             {country.borders && (
@@ -129,6 +144,8 @@ const SingleCountry = () => {
             )}
           </Col>
         </Row>
+
+        <CountryMap lat={country.latlng[0]} lng={country.latlng[1]} />
       </Card>
     </Container>
   );

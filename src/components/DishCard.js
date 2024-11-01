@@ -1,8 +1,15 @@
-// src/components/DishCard.js
+// First im importing react so i can create and use this component.
+// Then im importing bootsrap to use its components like the card, row and column for easy layout and styling.
+// And the link component from react router for navigation links to other pages.
+
 import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../styles/DishCard.css";
+
+// this component displays a small, clickable card for each dish with its image, title, and cuisine area which is whatever country the dish is from.
+// The card is wrappaed in a link, so when a user clicks it brings them to a singlular dish page.
+// The rest of the code is jsut styling with bootstrap like shadows, margins, and centered positioning of the card.
 
 const DishCard = ({ title, image, area }) => {
   return (
@@ -35,7 +42,7 @@ const DishCard = ({ title, image, area }) => {
             <Card.Body className="d-flex flex-column justify-content-between">
               <Card.Title
                 style={{
-                  fontSize: "10px",
+                  fontSize: "14px",
                   fontWeight: "bold",
                   marginBottom: "4px",
                 }}
@@ -52,5 +59,7 @@ const DishCard = ({ title, image, area }) => {
     </Link>
   );
 };
+
+//// and again exporting the component so it can be used in other parts of the app!
 
 export default DishCard;

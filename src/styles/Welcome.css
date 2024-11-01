@@ -1,5 +1,3 @@
-/* Welcome.css */
-
 @font-face {
     font-family: 'LobsterTwo-Regular';
     src: url('../fonts/lobsterregular.ttf') format('truetype');
@@ -9,7 +7,7 @@
 
 .welcome-card {
     background-color: #ffcc00 !important;
-    /* Ensure yellow is applied */
+
     border: none !important;
     color: #302011;
     padding: 20px;

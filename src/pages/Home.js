@@ -1,37 +1,48 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+// importing previously made components
+
 import CountryCard from "../components/CountryCard";
 import WelcomeCard from "../components/WelcomeCard";
 import MultiCulturalRow from "../components/MultiCulturalRow";
 import InfoBanner from "../components/InfoBanner";
+
+// importing bootstrap components
 import { Row, Col, Form, Spinner, Alert, Container } from "react-bootstrap";
 
+// setting a states like; list of countries, search term status, loading status as true, and error status.
 const Home = () => {
   const [countriesList, setCountriesList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // this calls the fetch coutries function to get axios to send a GET request to the rest countries api and get all countries
+
   useEffect(() => {
     const fetchCountries = async () => {
       try {
         const response = await axios.get("https://restcountries.com/v3.1/all");
-        setCountriesList(response.data);
+        setCountriesList(response.data); // when it gets all the countries it updates the state of this
       } catch (error) {
-        console.error(error);
+        console.error(error); // if it doesnt get that data it updates the state
         setError("Error fetching countries. Please try again later.");
       } finally {
-        setLoading(false);
+        setLoading(false); // stop loading as the request is done
       }
     };
 
     fetchCountries();
-  }, []);
+  }, []); // runs only once when the component is first rendered
+
+  // update the search term as the user types and search term state with the input value which is probably a name of a country.
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
+  // from all the countries that are filtered get the country that matches the one the user searched for
   const filteredCountries = countriesList.filter((country) => {
     return country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
   });
@@ -47,7 +58,7 @@ const Home = () => {
         <Row>
           {/* Countries Column */}
           <Col xs={5} sm={5} md={8} className="mb-4">
-            {loading && (
+            {loading && ( //when its loading the country columns show spinner or error if it fails
               <Spinner
                 animation="border"
                 variant="primary"
@@ -71,19 +82,23 @@ const Home = () => {
             </Form>
 
             <Row xl={5} lg={3} md={2} sm={1} xs={1} className="g-4">
-              {filteredCountries.map((country) => (
-                <Col key={country.ccn3}>
-                  <CountryCard
-                    flag={country.flags.png}
-                    name={country.name.common}
-                    region={country.region}
-                  />
-                </Col>
-              ))}
+              {filteredCountries.map(
+                (
+                  country // get the filtered africna countries and display them in columns and rows
+                ) => (
+                  <Col key={country.ccn3}>
+                    <CountryCard
+                      flag={country.flags.png}
+                      name={country.name.common}
+                      region={country.region}
+                    />
+                  </Col>
+                )
+              )}
             </Row>
           </Col>
 
-          {/* MultiCulturalRow Column */}
+          {/* MultiCulturalRow Column is shown from the multicultural row components i previous created and imported */}
           <Col xs={7} sm={6} md={4}>
             <MultiCulturalRow />
           </Col>

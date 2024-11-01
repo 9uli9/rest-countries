@@ -1,11 +1,16 @@
 // WelcomeCard.js
 import React, { useEffect, useState } from "react";
 import { Card, Spinner } from "react-bootstrap";
-import "../styles/Welcome.css"; // Ensure this includes the necessary CSS
+import "../styles/Welcome.css";
 import axios from "axios";
 
+// this component creates a welcome card for a user depending on the continent page they are on.
+// each continent has a unique title and message depending on the region prop.
+// if its the home page itll show the default title and message.
+
+/////////////////////  LOGIC ////////////////////////
+
 const WelcomeCard = ({ region }) => {
-  // Messages and titles for each region
   const messages = {
     africa: "Discover diverse cultures and dishes of Africa!",
     americas: "Discover diverse cultures and dishes of the Americas!",
@@ -25,8 +30,16 @@ const WelcomeCard = ({ region }) => {
     default: "🌏 Welcome to Country Cuisine! 🍽️",
   };
 
+  //setting a state to hold gifs from giphy
+  // setting a loading state to hold the loading status of the gifs
+
   const [gifs, setGifs] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // fetch gifs gets axios to send a GET request to the GIPHY api with my API key i was provided from their page.
+  // i want it to hold a query that searches for giphys similar to people trying food for the homepage.
+  // it gets 4 giphs of people trying food
+  // with a kid friendly rating and in english.
 
   const fetchGifs = async () => {
     const apiKey = "YrihuDRQCdTnElAt5jIfCx60oCmslj3b";
@@ -42,21 +55,24 @@ const WelcomeCard = ({ region }) => {
           lang: "en",
         },
       });
-      setGifs(response.data.data);
+      setGifs(response.data.data); //update state with the gifs u got
     } catch (error) {
-      console.error("Error fetching GIFs:", error);
+      console.error("Error fetching GIFs:", error); // show error if you couldnt get them (i found out u can only make 100 requests per hour)
     } finally {
-      setLoading(false);
+      setLoading(false); // stop loading the request is done
     }
   };
 
   useEffect(() => {
     if (region === "default") {
+      // only get gifs if the user is on the homepage (default welcome card)
       fetchGifs();
     } else {
       setLoading(false);
     }
-  }, [region]);
+  }, [region]); //this runs if the region changes or the user goes onto a diffferent continet page
+
+  /////////////////////  RETURN ////////////////////////
 
   return (
     <Card className="text-center mb-4 mt-4 py-4 welcome-card">
@@ -66,24 +82,28 @@ const WelcomeCard = ({ region }) => {
         </Card.Title>
         <Card.Text>{messages[region] || messages.default}</Card.Text>
         {region === "default" && loading ? (
-          <Spinner animation="border" />
+          <Spinner animation="border" /> //show spinnter if the region is defautl and its loading
         ) : (
-          region === "default" && (
+          region === "default" && ( // if region is default and loading is complete do this
             <div className="row justify-content-center">
-              {gifs.map((gif) => (
-                <div className="col-6 col-sm-3 col-md-3 p-2" key={gif.id}>
-                  <img
-                    src={gif.images.fixed_height.url}
-                    alt={gif.title}
-                    className="img-fluid" // Ensures responsiveness
-                    style={{ 
-                      maxHeight: "250px", // Set a max height to keep images consistent
-                      objectFit: "cover",  // Ensures aspect ratio is maintained and no stretching occurs
-                      width: "100%"        // Make sure it takes full width of the column
-                    }} 
-                  />
-                </div>
-              ))}
+              {gifs.map(
+                (
+                  gif // go over each gif
+                ) => (
+                  <div className="col-6 col-sm-3 col-md-3 p-2" key={gif.id}>
+                    <img
+                      src={gif.images.fixed_height.url} // set the source of the image to the GIF URL and gif styling
+                      alt={gif.title}
+                      className="img-fluid"
+                      style={{
+                        maxHeight: "250px",
+                        objectFit: "cover",
+                        width: "100%",
+                      }}
+                    />
+                  </div>
+                )
+              )}
             </div>
           )
         )}
@@ -92,4 +112,5 @@ const WelcomeCard = ({ region }) => {
   );
 };
 
+// export the component so it can be used in other parts of the app!
 export default WelcomeCard;
